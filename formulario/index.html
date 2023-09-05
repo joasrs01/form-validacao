@@ -11,7 +11,9 @@
 </head>
 
 <body>
-	<h2>Formulário de cadastro de prestador de serviços</h2>
+	<div class="cabecalho">
+		<h2>Formulário de cadastro de prestador de serviços</h2>
+	</div>
 	<form name="formulario" action="">
 		<div class="row">
 			<div class="campo" style="flex-grow: 1">
@@ -27,7 +29,7 @@
 			<div class="vertical-row" style="flex-grow: 9">
 				<div class="campo" style="flex-grow: 1; margin-top: 5px;">
 					<label for="email">E-mail</label>
-					<input type="email" name="email" id="email" />
+					<input type="text" name="email" id="email"/>
 				</div>
 				<div class="campo" style="flex-grow: 2">
 					<label for="website">Website</label>
@@ -78,7 +80,7 @@
 			<fieldset class="acoes" style="flex-grow: 1">
 				<legend>Ações</legend>
 				<button type='submit' id="btnEnviar">Enviar</button>
-				<button type='reset'>Reiniciar</button>
+				<button type='reset' id="btnReiniciar">Reiniciar</button>
 				<button type='button' id='btnAjuda'>Ajuda</button>
 			</fieldset>
 		</div>
