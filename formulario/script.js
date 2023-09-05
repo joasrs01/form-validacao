@@ -17,44 +17,28 @@ let txtDataFim = document.querySelector('#datafim');
 function Enviar(evento){
     evento.preventDefault();
 
-    ValidarTxt(txtNome);
-
-    if( txtNome.value.length < 3 )
-        alert('nome menor que 3 caracteres');
-
+    ValidarNome();
     ValidarTxt(txtSobrenome);
-    ValidarTxt(txtEmail);
-    ValidarTxt(txtDataInicio);
-
-    if( txtDataFim.value.toDate() > txtDataInicio.value.toDate() ){
-        alert('teste')
-    }
-
-    ValidarTxt(txtDataFim);
-    
-    let regiao = document.querySelector("input[name='regiao']:checked");
-    if( regiao == null ){
-        let fs = document.querySelector('#fs-regiao');
-        fs.style.borderColor = "#FF0000";
-    }
-
+    ValidarEmail();
+    ValidarData();
+    ValidarRegiao();
     ValidarAtividade();
-
-    //console.log(atividades);
-    // console.log(document.querySelector('#centro').addEventListener('mouseleave', leave ));
-    // console.log(txtEmail.value);
-    // console.log(txtWebsite.value);
-    // console.log(txtDataInicio.value);
-    // console.log(txtDataFim.value);
-
-    //console.log(regiao);
 }
 
 function ValidarTxt(componente){
+
     if( componente.value == ''){
         componente.style.borderColor = "#FF0000";
         componente.style.backgroundColor = "#e9bcbc";
-    }  
+
+        return false;
+    }
+    else{
+        componente.style.borderColor = "#315c31f7";
+        componente.style.backgroundColor = "";
+    }
+
+    return true;
 }
 
 function ValidarAtividade(){   
@@ -67,15 +51,56 @@ function ValidarAtividade(){
             iQtdSelecionados++;     
     });
 
-    if( iQtdSelecionados == 0 || iQtdSelecionados > 3 ){
-        let fs = document.querySelector('#fs-atividade');
-        fs.style.borderColor = "#FF0000";
-    }
+    ColorirFieldset( document.querySelector('#fs-atividade'), iQtdSelecionados == 0 || iQtdSelecionados > 3 ? true : false );
 
     console.log(iQtdSelecionados);
+}
+
+function ValidarRegiao(){
+    let regiao = document.querySelector("input[name='regiao']:checked");
+    ColorirFieldset(document.querySelector('#fs-regiao'), regiao == null ? false : true );
 }
 
 function DesabilitarHabilitarAtividade(componente){ 
     document.querySelector('#dba').disabled = 
     document.querySelector('#programador').disabled = componente.target.id == 'centro' ? true : false;
+}
+
+function ValidarEmail(){
+    if( ValidarTxt(txtEmail)){
+        alert('email');
+    }
+}
+
+function ValidarNome(){
+    if( ValidarTxt(txtNome)){
+        if( txtNome.value.length < 3 )
+        alert('nome menor que 3 caracteres');
+    }
+}
+
+function ValidarData(){
+
+    let bValido = ValidarTxt(txtDataInicio);
+
+    // teve que ser feito assim pra ele fazer para os dois obrigatoriamente
+    // se não, caso o primeiro desse inválido, não entrava no segundo
+    if( bValido ) {
+        let bValido = ValidarTxt(txtDataFim);
+    }
+    else{
+        ValidarTxt(txtDataFim);
+    }
+
+    if( bValido ){
+        let dtFim = new Date( txtDataFim.value );
+        let dtIni = new Date( txtDataInicio.value );
+    
+        if( dtFim <= dtIni )
+            alert('Data de inicio maior ou igual que data final')
+    }
+}
+
+function ColorirFieldset( fieldSet ,valido ){
+    fieldSet.style.borderColor = valido ? "#315c31f7" : "#FF0000";
 }
