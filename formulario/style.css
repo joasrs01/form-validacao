@@ -1,3 +1,7 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 form {
     padding: 20px;
     background-color: #f9f9f9;
@@ -33,21 +37,37 @@ form {
 }
 
 fieldset {
-    border: 1px solid rgba(49, 92, 49, 0.97);
+    /* border: 1px solid #315c31f7; */
     border-radius: 5px;
     margin-top: 10px;
 }
 
 legend {
     padding: 0.2em 0.5em;
-    border: 1px solid rgba(49, 92, 49, 0.97);
+    /* border: 1px solid #315c31f7; */
     color: rgba(0, 0, 0, 0.99);
     font-size: 90%;
+    font-weight: bold;
     text-align: center;
 }
 
 button {
     padding: 10px;
     margin-right: 10px;
-    border: 1px solid #8a8a8a;
+    border: 2px solid;
+    border-radius: 5px;
+    width: 150px;
+    font-weight: 700;
+    font-size: medium;
+    background-color: #00d897;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #008d63;
+}
+
+.cabecalho {
+    text-align: center;
 }
