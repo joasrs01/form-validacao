@@ -71,3 +71,8 @@ button:hover {
 .cabecalho {
     text-align: center;
 }
+
+.campo .validacao {
+    color: #FF0000;
+    font-size: 85%;
+}
