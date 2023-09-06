@@ -12,16 +12,18 @@
 
 <body>
 	<div class="cabecalho">
-		<h2>Formulário de cadastro de prestador de serviços</h2>
+		<h2 class="validacao1">Formulário de cadastro de prestador de serviços</h2>
 	</div>
 	<form name="formulario" action="">
 		<div class="row">
 			<div class="campo" style="flex-grow: 1">
 				<label for="nome">Nome</label>
+				<label class="validacao" id="validacao-nome"></label>
 				<input type="text" name="nome" id="nome" />
 			</div>
 			<div class="campo" style="flex-grow: 1">
 				<label for="sobrenome">Sobrenome</label>
+				<label class="validacao" id="validacao-sobrenome"></label>
 				<input type="text" name="sobrenome" id="sobrenome" />
 			</div>
 		</div>
@@ -29,15 +31,19 @@
 			<div class="vertical-row" style="flex-grow: 9">
 				<div class="campo" style="flex-grow: 1; margin-top: 5px;">
 					<label for="email">E-mail</label>
-					<input type="text" name="email" id="email"/>
+					<label class="validacao" id="validacao-email"></label>
+					<input type="text" name="email" id="email" />
 				</div>
 				<div class="campo" style="flex-grow: 2">
 					<label for="website">Website</label>
+					<label class="validacao" id="validacao-website"></label>
 					<input type="url" name="website" id="website" />
-				</div>
+				</div> 
 			</div>
 			<fieldset class="grupo row" style="flex-grow: 1">
-				<legend>Período de dispibilidade</legend>
+				<legend>
+					Período de dispobilidade
+				</legend>		
 				<div class="campo" style="flex-grow: 1">
 					<label for="dataini">Data inicial</label>
 					<input type="date" name="dataini" id="dataini" />
@@ -46,6 +52,9 @@
 					<label for="datafim">Data final</label>
 					<input type="date" name="datafim" id="datafim" />
 				</div>
+				<div class="campo" >
+					<p class="validacao" id="validacao-disponibilidade">aaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+				</div>	
 			</fieldset>
 		</div>
 		<div class="row">
