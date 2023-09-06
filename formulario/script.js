@@ -51,31 +51,57 @@ function ValidarAtividade(){
             iQtdSelecionados++;     
     });
 
-    ColorirFieldset( document.querySelector('#fs-atividade'), iQtdSelecionados == 0 || iQtdSelecionados > 3 ? true : false );
-
-    console.log(iQtdSelecionados);
+    ColorirFieldset( document.querySelector('#fs-atividade'), 
+        iQtdSelecionados == 0 || iQtdSelecionados > 3 ? false : true );
 }
 
 function ValidarRegiao(){
     let regiao = document.querySelector("input[name='regiao']:checked");
-    ColorirFieldset(document.querySelector('#fs-regiao'), regiao == null ? false : true );
+    
+    ColorirFieldset(document.querySelector('#fs-regiao'), 
+        regiao == null ? false : true );
 }
 
 function DesabilitarHabilitarAtividade(componente){ 
-    document.querySelector('#dba').disabled = 
-    document.querySelector('#programador').disabled = componente.target.id == 'centro' ? true : false;
+
+    let dba = document.querySelector('#dba');
+    let programador = document.querySelector('#programador');
+
+    dba.checked = false;
+    programador.checked = false;
+
+    dba.disabled = 
+    programador.disabled = componente.target.id == 'centro' ? true : false;
 }
 
 function ValidarEmail(){
     if( ValidarTxt(txtEmail)){
-        alert('email');
+        let sEmail = txtEmail.value;
+        let iIndexArroba = sEmail.indexOf('@');
+        let iIndexPonto = sEmail.lastIndexOf('.');
+        let sMensagemInvalidacao = '';
+        let sVirgula = '';
+
+        if( iIndexArroba == -1 ){
+            sMensagemInvalidacao += 'deve conter @';
+            sVirgula = ', ';
+        }
+
+        if( iIndexPonto == -1  ){
+            sMensagemInvalidacao += sVirgula + 'deve conter .';
+        }
+
+        if( sMensagemInvalidacao == '' && iIndexPonto < iIndexArroba ){
+            sMensagemInvalidacao += '. deve vir depois do @';
+        }
+        
+        AdicionarInvalidacao('email', sMensagemInvalidacao);
     }
 }
 
 function ValidarNome(){
-    if( ValidarTxt(txtNome)){
-        if( txtNome.value.length < 3 )
-        alert('nome menor que 3 caracteres');
+    if( ValidarTxt(txtNome) && txtNome.value.length < 3 ){
+        AdicionarInvalidacao('nome', 'nome deve conter ao menos 3 letras');
     }
 }
 
@@ -96,11 +122,23 @@ function ValidarData(){
         let dtFim = new Date( txtDataFim.value );
         let dtIni = new Date( txtDataInicio.value );
     
-        if( dtFim <= dtIni )
-            alert('Data de inicio maior ou igual que data final')
+        if( dtFim <= dtIni ){
+            AdicionarInvalidacao('disponibilidade', 'Data de inicio maior ou igual que data final');
+        }
     }
 }
 
 function ColorirFieldset( fieldSet ,valido ){
-    fieldSet.style.borderColor = valido ? "#315c31f7" : "#FF0000";
+    fieldSet.style.borderColor = valido ? '#315c31f7' : '#FF0000';
+}
+
+function AdicionarInvalidacao(nomeCampo, mensagem){
+
+    let validacao = document.querySelector('#validacao-' + nomeCampo);
+    let campo = document.querySelector('#' + nomeCampo);
+
+    if( validacao != null )
+        validacao.textContent = mensagem != '' ? '* ' + mensagem : '';
+    if( campo != null )
+        campo.style.borderColor = mensagem != '' ? '#FF0000' : '#315c31f7';
 }
